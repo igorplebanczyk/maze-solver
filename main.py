@@ -1,4 +1,4 @@
-from graphicComponents import Window, Point
+from graphic_components import Window, Point
 from maze import Maze
 
 def main():

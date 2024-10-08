@@ -1,4 +1,4 @@
-from graphicComponents import Window, Line, Point
+from graphic_components import Window, Line, Point
 from cell import Cell
 import time
 import random
