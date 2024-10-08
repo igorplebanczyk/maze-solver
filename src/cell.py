@@ -1,4 +1,4 @@
-from graphic_components import Line, Point
+from .graphic_components import Line, Point
 
 class Cell:
     def __init__(self, win):

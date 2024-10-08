@@ -1,8 +1,8 @@
 import random
 import time
 
-from cell import Cell
-from graphic_components import Window, Point
+from .cell import Cell
+from .graphic_components import Window, Point
 
 
 class Maze:
