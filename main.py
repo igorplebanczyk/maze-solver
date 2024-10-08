@@ -9,4 +9,5 @@ def main():
 
     window.wait_for_close()
 
-main()
+if __name__ == '__main__':
+    main()
