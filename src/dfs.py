@@ -1,12 +1,24 @@
-from src import Maze
-from src.algorithms.algorithm import Algorithm
+import time
+from .maze import Maze
 
-
-class DFS(Algorithm):
+class DFS:
     def __init__(self, maze: Maze):
-        super().__init__(maze)
+        self._maze = maze
+        self._cells = maze.cells
+        self._numRows = maze.numRows
+        self._numCols = maze.numCols
+        self._origin = maze.origin
+        self._win = maze.win
 
-    def _solve_r(self, i: int, j: int):
+    def _animate(self):
+        if not self._win:
+            return
+
+        self._win.redraw()
+        time.sleep(0.005)
+        print("Animating...")
+
+    def _solve_r(self, i: int, j: int) -> bool:
         self._animate()
 
         current_cell = self._cells[i][j]
