@@ -16,7 +16,6 @@ class DFS:
 
         self._win.redraw()
         time.sleep(0.005)
-        print("Animating...")
 
     def _solve_r(self, i: int, j: int) -> bool:
         self._animate()
@@ -61,6 +60,11 @@ class DFS:
         return False
 
     def solve(self):
+        start_time = time.time()
         self._cells[0][0].draw_half_move('top')
         self._solve_r(0, 0)
         self._cells[self._numRows - 1][self._numCols - 1].draw_half_move('bottom')
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        if self._win:
+            self._win.display_time(elapsed_time)

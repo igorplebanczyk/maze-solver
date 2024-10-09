@@ -1,4 +1,5 @@
-from tkinter import Tk, Canvas
+from tkinter import Tk, Canvas, Label, TOP
+
 
 class Point:
     def __init__(self, x, y):
@@ -20,22 +21,26 @@ class Window:
         self.__root = Tk()
         self.__root.title("Maze")
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
+        self.time_label = Label(self.__root, text="", font=("Helvetica", 16))
+        self.time_label.pack(side=TOP)
         self.canvas = Canvas(self.__root, width=width, height=height, bg="white")
         self.canvas.pack()
         self.__isRunning = False
-    
+
     def redraw(self):
         self.__root.update_idletasks()
         self.__root.update()
-    
+
     def wait_for_close(self):
         self.__isRunning = True
         while self.__isRunning:
             self.redraw()
-    
+
     def close(self):
         self.__isRunning = False
-    
-    def draw_line(self, line: Line, fill_color: str  = "black"):
+
+    def draw_line(self, line: Line, fill_color: str = "black"):
         line.draw(self.canvas, fill_color)
 
+    def display_time(self, elapsed_time: float):
+        self.time_label.config(text=f"Time taken: {elapsed_time:.2f} seconds")
