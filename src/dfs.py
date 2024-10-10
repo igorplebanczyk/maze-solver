@@ -1,18 +1,19 @@
 import time
 
+from src.graphic_components import Point, Window
 from src.maze import Maze
-
+from src.cell import Cell
 
 class DFS:
-    def __init__(self, maze: Maze):
-        self._maze = maze
-        self._cells = maze.cells
-        self._numRows = maze.numRows
-        self._numCols = maze.numCols
-        self._origin = maze.origin
-        self._win = maze.win
+    def __init__(self, maze: Maze) -> None:
+        self._maze: Maze = maze
+        self._cells: list[Cell] = maze.cells
+        self._numRows: int = maze.numRows
+        self._numCols: int = maze.numCols
+        self._origin: Point = maze.origin
+        self._win: Window = maze.win
 
-    def _animate(self):
+    def _animate(self) -> None:
         if not self._win:
             return
 
@@ -61,7 +62,7 @@ class DFS:
 
         return False
 
-    def solve(self):
+    def solve(self) -> None:
         start_time = time.time()
         self._cells[0][0].draw_half_move('top')
         self._solve_r(0, 0)

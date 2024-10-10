@@ -6,30 +6,28 @@ from src.graphic_components import Window, Point
 
 
 class Maze:
-    def __init__(self, origin: Point, num_rows: int, num_cols: int, cell_size_x: int, cell_size_y: int,
-                 win: Window = None,
-                 seed: int = None):
-        self.origin = origin
-        self.numRows = num_rows
-        self.numCols = num_cols
-        self.__cellSizeX = cell_size_x
-        self.__cellSizeY = cell_size_y
-        self.cells = None
-        self.win = win
-        self._seed = random.seed(seed) if seed else seed
+    def __init__(self, origin: Point, num_rows: int, num_cols: int, cell_size_x: int, cell_size_y: int, win: Window = None, seed: int = None) -> None:
+        self.origin: Point = origin
+        self.numRows: int = num_rows
+        self.numCols: int = num_cols
+        self.__cellSizeX: int = cell_size_x
+        self.__cellSizeY: int = cell_size_y
+        self.cells: list[Cell] = []
+        self.win: Window = win
+        self._seed: int = random.seed(seed) if seed else seed
 
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
         self._reset_cells_visited()
 
-    def _create_cells(self):
+    def _create_cells(self) -> None:
         self.cells = [[Cell(self.win) for _ in range(self.numRows)] for _ in range(self.numCols)]
         for i in range(self.numRows):
             for j in range(self.numCols):
                 self._draw_cells(i, j)
 
-    def _draw_cells(self, i: int, j: int):
+    def _draw_cells(self, i: int, j: int) -> None:
         if not self.win:
             return
         top_left = Point(self.origin.x + j * self.__cellSizeX, self.origin.y + i * self.__cellSizeY)
@@ -37,13 +35,13 @@ class Maze:
         self.cells[i][j].draw(top_left, bottom_right)
         self._animate()
 
-    def _animate(self):
+    def _animate(self) -> None:
         if not self.win:
             return
         self.win.redraw()
         time.sleep(0.005)
 
-    def _break_wall(self, i: int, j: int, direction: str):
+    def _break_wall(self, i: int, j: int, direction: str) -> None:
         top_left = Point(self.origin.x + j * self.__cellSizeX, self.origin.y + i * self.__cellSizeY)
         bottom_right = Point(top_left.x + self.__cellSizeX, top_left.y + self.__cellSizeY)
         match direction:
@@ -59,12 +57,12 @@ class Maze:
                 pass
         self.cells[i][j].draw(top_left, bottom_right)
 
-    def _break_entrance_and_exit(self):
+    def _break_entrance_and_exit(self) -> None:
         self._break_wall(0, 0, 'top')
         self._break_wall(self.numRows - 1, self.numCols - 1, 'bottom')
         self.win.redraw()
 
-    def _break_walls_r(self, i: int, j: int):
+    def _break_walls_r(self, i: int, j: int) -> None:
         current_cell = self.cells[i][j]
         current_cell.visited = True
         while True:
@@ -100,13 +98,11 @@ class Maze:
             # Recursively visit the neighbor
             self._break_walls_r(*next_cell)
 
-    def _reset_cells_visited(self):
+    def _reset_cells_visited(self) -> None:
         for i in range(self.numRows):
             for j in range(self.numCols):
                 self.cells[i][j].visited = False
 
-    # Add a method to allow using any maze-solving algorithm, like DFS
     @staticmethod
-    def solve(algorithm):
-        """Solve the maze using the provided algorithm."""
+    def solve(algorithm) -> None:
         algorithm.solve()
