@@ -1,11 +1,13 @@
 import random
 import time
 
-from .cell import Cell
-from .graphic_components import Window, Point
+from src.cell import Cell
+from src.graphic_components import Window, Point
+
 
 class Maze:
-    def __init__(self, origin: Point, num_rows: int, num_cols: int, cell_size_x: int, cell_size_y: int, win: Window = None,
+    def __init__(self, origin: Point, num_rows: int, num_cols: int, cell_size_x: int, cell_size_y: int,
+                 win: Window = None,
                  seed: int = None):
         self.origin = origin
         self.numRows = num_rows

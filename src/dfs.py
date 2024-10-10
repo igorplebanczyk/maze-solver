@@ -1,5 +1,7 @@
 import time
-from .maze import Maze
+
+from src.maze import Maze
+
 
 class DFS:
     def __init__(self, maze: Maze):
