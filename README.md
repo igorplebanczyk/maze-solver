@@ -20,9 +20,9 @@ Simple maze solver built in Python. Features a minimalist graphic display. Autom
     python3 --version
     ```
 
-3. Install Tkinter
+3. Install required packages
     ```bash
-    pip install tk
+    pip install -r requirements.txt
     ```
 
 ## Usage
